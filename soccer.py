@@ -90,6 +90,7 @@ fig_radar.update_layout(
 )
 
 # Display the radar chart
+st.subheader("Radar Chart Comparison")
 st.plotly_chart(fig_radar)
 
 # Bar chart visualization for comparison
@@ -114,34 +115,35 @@ pizza_labels = metrics_labels
 pizza_values_player1 = player1_metrics
 pizza_values_player2 = player2_metrics
 
-# Pizza chart visualization for Player 1
-fig_pizza1 = go.Figure(go.Barpolar(
-    r=pizza_values_player1,
-    theta=pizza_labels,
-    marker=dict(color=["#ff6347", "#4682b4", "#3cb371", "#ffa500"]),
-    name=player1
-))
+# Re-generate pizza chart visualization for Player 1
+if player1 and player2:
+    fig_pizza1 = go.Figure(go.Barpolar(
+        r=pizza_values_player1,
+        theta=pizza_labels,
+        marker=dict(color=["#ff6347", "#4682b4", "#3cb371", "#ffa500"]),
+        name=player1
+    ))
 
-fig_pizza1.update_layout(
-    polar=dict(radialaxis=dict(visible=True)),
-    showlegend=False,
-    title=f'Pizza Chart for {player1}'
-)
+    fig_pizza1.update_layout(
+        polar=dict(radialaxis=dict(visible=True)),
+        showlegend=False,
+        title=f'Pizza Chart for {player1}'
+    )
 
-# Pizza chart visualization for Player 2
-fig_pizza2 = go.Figure(go.Barpolar(
-    r=pizza_values_player2,
-    theta=pizza_labels,
-    marker=dict(color=["#ff6347", "#4682b4", "#3cb371", "#ffa500"]),
-    name=player2
-))
+    # Re-generate pizza chart visualization for Player 2
+    fig_pizza2 = go.Figure(go.Barpolar(
+        r=pizza_values_player2,
+        theta=pizza_labels,
+        marker=dict(color=["#ff6347", "#4682b4", "#3cb371", "#ffa500"]),
+        name=player2
+    ))
 
-fig_pizza2.update_layout(
-    polar=dict(radialaxis=dict(visible=True)),
-    showlegend=False,
-    title=f'Pizza Chart for {player2}'
-)
+    fig_pizza2.update_layout(
+        polar=dict(radialaxis=dict(visible=True)),
+        showlegend=False,
+        title=f'Pizza Chart for {player2}'
+    )
 
-# Display the pizza charts
-st.plotly_chart(fig_pizza1)
-st.plotly_chart(fig_pizza2)
+    # Re-render the pizza charts for the selected players
+    st.plotly_chart(fig_pizza1)
+    st.plotly_chart(fig_pizza2)
